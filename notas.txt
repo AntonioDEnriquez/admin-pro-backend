@@ -1,0 +1,42 @@
+// Crea lo que es el package.json el cual sera mi punto de entrada de mi aplicacion
+npm init -y
+
+// 
+npm install express --save
+
+// Instalar nodemon para correr el servidor sin necesidad de estarlo iniciandorder
+// npm install -g nodemon
+
+// Instalar mongoose para realizar la conexion con mongoDB
+// npm i mongoose
+
+// Para crear variables de entorno
+// npm i dotenv
+
+// Instalar CORS
+// Sirve para hacer la configuracion en el servidor para que acepte peticiones de diferentes dominios
+// npm install cors
+
+// Para subir a github se tiene que realizar la siguiente configuracion
+
+// Crear archivo.gitignore
+// En este archivo solo ponemos el node_modules/ ya que a este no se le requiere dar seguimiento
+
+// Despues creamos el archivo README.md
+// Este es un estandar para indicar que este es el archivo hay que leer para indicar lo que hay dentro del archivo
+
+// Para subir a github realizamos lo siguiente
+
+// Si es la primera vez, tenemos que inicializar el repositorio con
+// git init
+
+// Para tomar todos los cambios y prepararlos para la fotografia
+// git add .
+
+// Para realizar el primer commit junto con un mensaje
+// git commit -m "CORS Y Express"
+
+// Ejecutamos las siguientes lineas que nos da git cuando creamos el repositorio
+// git remote add origin https://github.com/AntonioDEnriquez/admin-pro-backend.git
+// git branch -M main
+// git push -u origin main
