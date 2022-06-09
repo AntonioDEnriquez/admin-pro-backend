@@ -40,3 +40,20 @@ npm install express --save
 // git remote add origin https://github.com/AntonioDEnriquez/admin-pro-backend.git
 // git branch -M main
 // git push -u origin main
+
+// Se recomienda que los archivos .env no deberian de estar en el repositorio
+
+// Crear tags en github
+
+// Para hacer la notacion de la version
+// git tag -a v0.1.0 -m "Inicio de backend"
+
+// Para subirlo a github
+// git push --tags 
+
+
+// Instalamos npm i express-validator nos permite hacer validaciones semiautomaticas en cada una de las rutas que yo quiero
+// Instalamos npm i bcryptjs para encriptar contraseñas
+
+// Instalamos npm i jsonwebtoken para generar tokens
+

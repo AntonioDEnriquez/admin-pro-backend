@@ -17,6 +17,10 @@ const app = express();
 // Cada vez que se haga una peticion va a pasar por aca y va a tener configurado la parte del CORS
 app.use(cors());
 
+// Lectura y parseo del body
+// esto debe de ir antes de las rutas por que debe de realizarlo primero
+app.use(express.json());
+
 // Base de datos
 // User: mean_user
 // Contra: bmaDiZi8XvExZeUG
@@ -27,16 +31,18 @@ dbConnection();
 
 
 // Rutas
-app.get('/', (req, res) => {
-    // resp.status para poner un codigo
-    res.status(400).json({
-        ok: true,
-        msg: 'Hola Mundo'
-    });
-})
+// Middleware
+// Cualquier peticion que pase por el /api/usuarios sera respondida por el router que estoy exportando por defecto aqui require('./routes/usuarios')
+app.use('/api/usuarios', require('./routes/usuarios'));
+
+// Cualquier peticion que pase por el /api/login sera respondida por el router que estoy exportando por defecto aqui require('./routes/auth')
+app.use('/api/login', require('./routes/auth'));
+
 
 
 // levantar el servidor
 app.listen(process.env.PORT, () => {
     console.log('Servidor corriendo en puerto' + ' ' + 3000);
 });
+
+/* Middlewares: Son funciones que se ejecutan antes de llegar a otras, tambien verifican que la informacion venga como nosotros esperamos */
