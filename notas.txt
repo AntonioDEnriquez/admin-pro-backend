@@ -57,3 +57,7 @@ npm install express --save
 
 // Instalamos npm i jsonwebtoken para generar tokens
 
+// Instalamos npm i express-fileupload para subir archivos mediante express
+
+// Instalamos npm install uuid para generar identificadores unicos
+

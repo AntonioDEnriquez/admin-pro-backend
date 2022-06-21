@@ -32,12 +32,30 @@ dbConnection();
 
 // Rutas
 // Middleware
+
+// Usuarios
 // Cualquier peticion que pase por el /api/usuarios sera respondida por el router que estoy exportando por defecto aqui require('./routes/usuarios')
 app.use('/api/usuarios', require('./routes/usuarios'));
 
+// Login
 // Cualquier peticion que pase por el /api/login sera respondida por el router que estoy exportando por defecto aqui require('./routes/auth')
 app.use('/api/login', require('./routes/auth'));
 
+// Hospitales
+// Cualquier peticion que pase por el /api/hospitales sera respondida por el router que estoy exportando por defecto aqui require('./routes/hospitales')
+app.use('/api/hospitales', require('./routes/hospitales'));
+
+// Medicos
+// Cualquier peticion que pase por el /api/medicos sera respondida por el router que estoy exportando por defecto aqui require('./routes/medicos')
+app.use('/api/medicos', require('./routes/medicos'));
+
+// Busquedas
+// Cualquier peticion que pase por el /api/todo sera respondida por el router que estoy exportando por defecto aqui require('./routes/busquedas')
+app.use('/api/todo', require('./routes/busquedas'));
+
+// Subir archivos
+// Cualquier peticion que pase por el /api/uploads sera respondida por el router que estoy exportando por defecto aqui require('./routes/uploads')
+app.use('/api/upload', require('./routes/uploads'));
 
 
 // levantar el servidor

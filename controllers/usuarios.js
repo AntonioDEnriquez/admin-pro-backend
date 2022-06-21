@@ -15,14 +15,40 @@ const { generarJWT } = require('../helpers/jwt');
 // Funcion
 const getUsuarios = async (req, res) => {
     // Traer Usuarios
-    const usuarios = await Usuario.find({}, 'nombre email role google');
+    // Paginacion para traer de cierta cantidad en cierta cantidad de registros
+
+    // para recibir un parametro opcional
+    // Number para transformar a numero
+    // Number(req.query.desde) desde es la variable que mandamos en la ruta por ejemplo http://localhost:3000/api/usuarios?desde=5
+    const desde = Number(req.query.desde) || 0; // Si no viene nada entonces utilizara 0
 
 
+    // const usuarios = await Usuario.find({}, 'nombre email role google').skip(desde).limit(5); /* Agregamos el skip para decirle que se salte todos los registros que estan antes del desde
+    //  es decir, estoy en el cero empieza en el cero pero si esto en el 5 que se salte los anteriores 5, el limit es para establecer cuantos registros queremos desde la posicion del desde
+    //  entonces si el desde es igual a 5 traera 5 registros apartir de la posicion 5  */
+
+    // // Para saber cuantos registros hay en la bd
+    // const total = await Usuario.count();
+
+    // Ejecuta toda estas promesas, ponemos await por que tambien es otra promesa
+    // Utilizamos esta en lugar del codigo de arriba por que como son dos await pueden tardar mucho en responder cada uno entonces el resultado tardaria mucho en llegar
+    // Desestructuramos para sacar los usuarios y el total
+    const [usuarios, total] = await Promise.all([
+        /* Le decimos ejecuta esto y lo que sea que resuelvas eso va a ser el producto del promise.all, el promise.all tambien regresa un arreglo cuya primera posicion 
+         va a ser el resultado de la primera promesa y si ponemos otra esta seria el segundo valor */
+        Usuario.find({}, 'nombre email role google img').skip(desde).limit(5), /* Agregamos el skip para decirle que se salte todos los registros que estan antes del desde
+    //  es decir, estoy en el cero empieza en el cero pero si esto en el 5 que se salte los anteriores 5, el limit es para establecer cuantos registros queremos desde la posicion del desde
+    //  entonces si el desde es igual a 5 traera 5 registros apartir de la posicion 5  */
+        // // Para saber cuantos registros hay en la bd
+
+        Usuario.countDocuments()
+    ]);
 
     // resp.status para poner un codigo
     res.json({
         ok: true,
         usuarios,
+        total
         // uid: req.uid
     });
 }
