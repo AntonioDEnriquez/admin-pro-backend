@@ -8,13 +8,14 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 // importamos el controlador
-const { login } = require('../controllers/auth');
+const { login, googleSignIn } = require('../controllers/auth');
 const { validarCampos } = require('../middlewares/validar-campos');
 
 // Creamos la instancia de router
 const router = Router();
 
 
+// Login
 router.post('/',
     [
         check('email', 'El email es obligatorio').isEmail(),
@@ -22,6 +23,15 @@ router.post('/',
         validarCampos
     ],
     login
+);
+
+// Login Google
+router.post('/google',
+    [
+        check('token', 'El Token de google es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
+    googleSignIn
 )
 
 

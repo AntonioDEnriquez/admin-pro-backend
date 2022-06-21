@@ -17,6 +17,10 @@ const app = express();
 // Cada vez que se haga una peticion va a pasar por aca y va a tener configurado la parte del CORS
 app.use(cors());
 
+// Carpeta publica
+// Para poder acceder al index.html
+app.use(express.static('public'));
+
 // Lectura y parseo del body
 // esto debe de ir antes de las rutas por que debe de realizarlo primero
 app.use(express.json());
