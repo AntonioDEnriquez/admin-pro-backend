@@ -28,7 +28,7 @@ const MedicosSchema = Schema({
 
 MedicosSchema.method('toJSON', function () {
     // Extraemos el password del objeto para que no se muestre en las respuestas
-    const { __v, password, ...object } = this.toObject();
+    const { __v, ...object } = this.toObject();
 
     return object;
 });

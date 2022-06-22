@@ -8,8 +8,9 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 // importamos el controlador
-const { login, googleSignIn } = require('../controllers/auth');
+const { login, googleSignIn, renewToken } = require('../controllers/auth');
 const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require("../middlewares/validar-jwt");
 
 // Creamos la instancia de router
 const router = Router();
@@ -32,7 +33,13 @@ router.post('/google',
         validarCampos
     ],
     googleSignIn
-)
+);
+
+
+router.get('/renew',
+    validarJWT,
+    renewToken
+);
 
 
 
