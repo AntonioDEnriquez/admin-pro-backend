@@ -73,10 +73,10 @@ const actualizarHospital = async (req, res = response) => {
         });
     }
 
-    res.json({
-        ok: true,
-        msg: 'Actualizar Hospitales'
-    });
+    // res.json({
+    //     ok: true,
+    //     msg: 'Actualizar Hospitales'
+    // });
 }
 
 const borrarHospital = async (req, res = response) => {
@@ -110,10 +110,10 @@ const borrarHospital = async (req, res = response) => {
     }
 
 
-    res.json({
-        ok: true,
-        msg: 'Borrar Hospitales'
-    });
+    // res.json({
+    //     ok: true,
+    //     msg: 'Borrar Hospitales'
+    // });
 }
 
 module.exports = {

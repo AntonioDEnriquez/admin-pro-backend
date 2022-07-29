@@ -22,7 +22,6 @@ const getUsuarios = async (req, res) => {
     // Number(req.query.desde) desde es la variable que mandamos en la ruta por ejemplo http://localhost:3000/api/usuarios?desde=5
     const desde = Number(req.query.desde) || 0; // Si no viene nada entonces utilizara 0
 
-
     // const usuarios = await Usuario.find({}, 'nombre email role google').skip(desde).limit(5); /* Agregamos el skip para decirle que se salte todos los registros que estan antes del desde
     //  es decir, estoy en el cero empieza en el cero pero si esto en el 5 que se salte los anteriores 5, el limit es para establecer cuantos registros queremos desde la posicion del desde
     //  entonces si el desde es igual a 5 traera 5 registros apartir de la posicion 5  */
@@ -152,8 +151,15 @@ const actualizarUsuario = async (req, res = response) => {
             }
         }
 
-        // Ponemos el email que queremos actualizar, en teoria se lo estamos regresando ya que anteriormente se habia extraido
-        campos.email = email;
+        if (!usuarioDB.google) {
+            // Ponemos el email que queremos actualizar, en teoria se lo estamos regresando ya que anteriormente se habia extraido
+            campos.email = email;
+        } else if (usuarioDB.email !== email) {
+            return res.status(400).json({
+                ok: false,
+                msg: 'Usuarios de google no pueden cambiar su correo'
+            });
+        }
 
         // Si el usuario existe
         // Actualizaciones
