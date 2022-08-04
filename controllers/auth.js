@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const { response } = require('express');
 const { generarJWT } = require('../helpers/jwt');
+const { getMenuFrontEnd } = require('../helpers/menu-frontend');
 const Usuario = require('../models/usuario');
 const { googleVerify } = require('../helpers/google-verify');
 
@@ -37,7 +38,8 @@ const login = async (req, res = response) => {
         // Una vez generado el token retornamos la respuesta
         res.json({
             ok: true,
-            token
+            token,
+            menu: getMenuFrontEnd(usuarioDB.role)
         });
 
 
@@ -81,8 +83,13 @@ const googleSignIn = async (req, res = response) => {
 
         res.json({
             ok: true,
-            email, name, picture, token
-        })
+            email,
+            name,
+            picture,
+            token,
+            menu: getMenuFrontEnd(usuario.role)
+        });
+
     } catch (error) {
         console.log(error);
         res.status(400).json({
@@ -106,14 +113,15 @@ const renewToken = async (req, res = response) => {
     const [token, usuarios] = await Promise.all([
         generarJWT(uid),
         Usuario.findById(uid)
-    ])
+    ]);
 
     res.json(
         {
             ok: true,
             token,
-            usuarios
-        })
+            usuarios,
+            menu: getMenuFrontEnd(usuarios.role)
+        });
 }
 
 module.exports = { login, googleSignIn, renewToken }

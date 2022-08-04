@@ -13,7 +13,7 @@ const router = Router();
 
 // Importamos nuestro middleware validar campos
 const { validarCampos } = require('../middlewares/validar-campos');
-const { validarJWT } = require('../middlewares/validar-jwt');
+const { validarJWT, validarADMIN_ROLE, validarADMIN_ROLE_o_MismoUsuario } = require('../middlewares/validar-jwt');
 
 
 // Solo mandamos la referencia a la funcion, no ejecutamos, osea no le ponemos parentesis
@@ -45,6 +45,8 @@ router.post('/',
 router.put('/:id',
     [
         validarJWT,
+        // Validacion de role
+        validarADMIN_ROLE_o_MismoUsuario,
         // Verifica que nombre no este vacio
         check('nombre', 'El nombre es obligatorio').not().isEmpty(),
         // Verifica que email sea un Email
@@ -58,7 +60,10 @@ router.put('/:id',
 );
 
 router.delete('/:id',
-    validarJWT,
+    [
+        validarJWT,
+        validarADMIN_ROLE,
+    ],
     borrarUsuario
 );
 

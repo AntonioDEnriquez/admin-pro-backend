@@ -10,6 +10,7 @@ const getTodo = async (req, res = response) => {
 
     const busqueda = req.params.busqueda;
 
+
     // Convertimos el parametro a una expesion regular y le decimos que sea insensitive para poder buscar cualquier coincidencia
     const regex = new RegExp(busqueda, 'i');
 
@@ -38,6 +39,7 @@ const getDocumentosCollecion = async (req, res = response) => {
 
     const tabla = req.params.tabla;
     const busqueda = req.params.busqueda;
+    console.log(busqueda);
 
     // Convertimos el parametro a una expesion regular y le decimos que sea insensitive para poder buscar cualquier coincidencia
     const regex = new RegExp(busqueda, 'i');
