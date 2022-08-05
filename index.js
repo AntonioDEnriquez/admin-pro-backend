@@ -2,11 +2,13 @@
 // Leer variables de entorno
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 
 const { dbConnection } = require('./database/config');
 
 // CORS
 const cors = require('cors');
+const res = require('express/lib/response');
 
 
 // Crear el servidor de express
@@ -60,6 +62,11 @@ app.use('/api/todo', require('./routes/busquedas'));
 // Subir archivos
 // Cualquier peticion que pase por el /api/uploads sera respondida por el router que estoy exportando por defecto aqui require('./routes/uploads')
 app.use('/api/upload', require('./routes/uploads'));
+
+// Lo ultimo, si es cualquier otra ruta hara lo siguiente
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public/index.html'));
+});
 
 
 // levantar el servidor
